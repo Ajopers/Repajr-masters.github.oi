@@ -1,0 +1,1141 @@
+<html><head><base href="/" />
+<meta charset="UTF-8">
+<title>Равшан и Джамшут - Мастера Ремонта</title>
+<style>
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+    min-height: 100vh;
+}
+
+.reviews-panel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 15px;
+    z-index: 900;
+}
+
+.review {
+    background: linear-gradient(135deg, #fff, #f8f9fa);
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 4px solid;
+    animation: slideIn 0.3s ease-out;
+}
+
+.review.positive {
+    border-left-color: #2ecc71;
+}
+
+.review.negative {
+    border-left-color: #e74c3c;
+}
+
+.review-stars {
+    color: #f1c40f;
+    margin-bottom: 5px;
+}
+
+.review-text {
+    font-size: 0.9em;
+    color: #2c3e50;
+}
+
+.review-date {
+    font-size: 0.8em;
+    color: #7f8c8d;
+    margin-top: 5px;
+}
+
+.rating-badge {
+    position: fixed;
+    bottom: 430px;
+    right: 20px;
+    background: linear-gradient(135deg, #f1c40f, #f39c12);
+    padding: 10px 20px;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 901;
+    display: none;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.rainy {
+    background: linear-gradient(45deg, #4a6fa5, #166D9A);
+    animation: rain 0.3s linear infinite;
+}
+
+.windy {
+    background: linear-gradient(45deg, #E3E3E3, #C4D7E0);
+    animation: wind 2s linear infinite;
+}
+
+@keyframes rain {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+}
+
+@keyframes wind {
+    0% { background-position: 0 0; }
+    100% { background-position: 200px 0; }
+}
+
+.combo-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    pointer-events: none;
+    animation: comboPopup 0.5s ease-out forwards;
+}
+
+@keyframes comboPopup {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
+.game-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 3px solid #FFE66D;
+}
+
+h1 {
+    text-align: center;
+    color: #FF6B6B;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    background: linear-gradient(to right, #FF6B6B, #4ECDC4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.characters {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    perspective: 1000px;
+}
+
+.character {
+    text-align: center;
+    background: linear-gradient(135deg, #FFE66D, #FFD93D);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.character:hover {
+    transform: translateY(-10px) rotateY(5deg);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.character img {
+    width: 250px;
+    height: 350px;
+    object-fit: contain;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+    border: 4px solid white;
+}
+
+.character h3 {
+    color: #2C3E50;
+    margin: 15px 0;
+    font-size: 1.5em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #4ECDC4, #2AB7CA);
+    border-radius: 15px;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.apartment {
+    border: 3px solid #4ECDC4;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.tools {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.tool {
+    padding: 15px 25px;
+    background: linear-gradient(45deg, #FF6B6B, #FF8E8E);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.tool:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+#new-task-btn {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(45deg, #4ECDC4, #2AB7CA);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.3em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    font-weight: bold;
+}
+
+#new-task-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 30px;
+    background: #f0f0f0;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 15px 0;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+    border: 2px solid #4ECDC4;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #4ECDC4, #2AB7CA);
+    transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(255,255,255,0.2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255,255,255,0.2) 50%,
+        rgba(255,255,255,0.2) 75%,
+        transparent 75%,
+        transparent
+    );
+    background-size: 30px 30px;
+    animation: stripe-animation 1s linear infinite;
+}
+
+@keyframes stripe-animation {
+    0% { background-position: 0 0; }
+    100% { background-position: 30px 0; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.task-complete {
+    animation: bounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background: linear-gradient(45deg, #4ECDC4, #2AB7CA);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transform: translateX(150%);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+    font-size: 1.1em;
+    max-width: 300px;
+    border: 2px solid white;
+}
+
+.notification.error {
+    background: linear-gradient(45deg, #FF6B6B, #FF8E8E);
+}
+
+.notification.success {
+    background: linear-gradient(45deg, #2ecc71, #27ae60);
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.powerup {
+    background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFA500;
+    }
+    to {
+        box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFA500;
+    }
+}
+
+.level-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: help;
+    transition: transform 0.3s ease;
+}
+
+.level-badge:hover {
+    transform: scale(1.2);
+}
+
+.level-info {
+    display: none;
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(45deg, #4ECDC4, #2AB7CA);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    white-space: nowrap;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.level-badge:hover .level-info {
+    display: block;
+}
+
+.tutorial-box {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(45deg, #4ECDC4, #2AB7CA);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    color: white;
+    z-index: 1000;
+    max-width: 400px;
+    text-align: center;
+    border: 2px solid white;
+}
+
+.tutorial-message {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.tutorial-next {
+    background: white;
+    color: #2AB7CA;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tutorial-highlight {
+    position: relative;
+    z-index: 999;
+    animation: highlight-pulse 1.5s infinite;
+}
+
+@keyframes highlight-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 230, 109, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 230, 109, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 230, 109, 0); }
+}
+
+.achievements-panel {
+    margin: 20px 0;
+    padding: 15px;
+    background: linear-gradient(135deg, #6c5ce7, #a8a4e6);
+    border-radius: 15px;
+    color: white;
+}
+
+.achievements-panel h3 {
+    text-align: center;
+    margin: 0 0 15px 0;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.achievement {
+    background: rgba(255,255,255,0.1);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+.achievement.locked {
+    filter: grayscale(1);
+    opacity: 0.5;
+}
+
+.achievement:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.achievement-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.achievement-title {
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.achievement-desc {
+    font-size: 0.8em;
+    opacity: 0.8;
+}
+</style>
+</head>
+<body>
+<audio id="click-sound" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
+</audio>
+<audio id="complete-sound" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3" type="audio/mpeg">
+</audio>
+<audio id="achievement-sound" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2578/2578-preview.mp3" type="audio/mpeg">
+</audio>
+<audio id="error-sound" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2572/2572-preview.mp3" type="audio/mpeg">
+</audio>
+<audio id="powerup-sound" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2574/2574-preview.mp3" type="audio/mpeg">
+</audio>
+<div class="game-container">
+    <h1>Равшан и Джамшут - Мастера Ремонта</h1>
+    
+    <div class="stats">
+        <div>Деньги: <span id="money">1000</span>₽</div>
+        <div>Репутация: <span id="reputation">0</span>/100</div>
+    </div>
+    
+    <div class="achievements-panel">
+        <h3>🏆 Достижения</h3>
+        <div id="achievements-list" class="achievements-grid"></div>
+    </div>
+
+    <div class="characters">
+        <div class="character">
+            <div class="level-badge" id="ravshan-level">
+            1
+            <div class="level-info">Уровень мастерства: 1</div>
+        </div>
+            <img src="/a/4d9fabc7-c3fe-4d22-baa5-43049b91d913" alt="Равшан - строитель в рабочей одежде, комичный персонаж" width="250" height="350">
+            <h3>Равшан</h3>
+            <div>Специалист по покраске</div>
+        </div>
+        <div class="character">
+            <div class="level-badge" id="jamshut-level">
+            1
+            <div class="level-info">Уровень мастерства: 1</div>
+        </div>
+            <img src="/a/4dc9f564-5b9b-423e-b5ad-31bcc6a231b9" alt="Джамшут - строитель в рабочей одежде, комичный персонаж" width="250" height="350">
+            <h3>Джамшут</h3>
+            <div>Специалист по плитке</div>
+        </div>
+    </div>
+
+    <div class="apartment" id="current-apartment">
+        <h2>Текущий заказ</h2>
+        <p id="task-description">Ждём нового заказа...</p>
+        <div class="progress-bar">
+            <div class="progress" id="task-progress"></div>
+        </div>
+    </div>
+
+    <div class="tools">
+        <button class="tool" onclick="useTool('paint')">🎨 Красить</button>
+        <button class="tool" onclick="useTool('tile')">🛠️ Класть плитку</button>
+        <button class="tool" onclick="useTool('clean')">🧹 Убрать</button>
+    </div>
+
+    <button onclick="getNewTask()" id="new-task-btn">Взять новый заказ</button>
+</div>
+
+<div id="notification" class="notification"></div>
+
+<div class="rating-badge" id="rating-badge">
+    Рейтинг: <span id="rating">0</span>⭐
+</div>
+
+<div class="reviews-panel" id="reviews-panel">
+    <h3>Последние отзывы</h3>
+    <div id="reviews-list"></div>
+</div>
+
+<script>
+// Sound functions
+function playSound(soundId) {
+    try {
+        const sound = document.getElementById(soundId);
+        if(sound) {
+            sound.currentTime = 0;
+            sound.play().catch(e => console.log('Sound play failed:', e));
+        }
+    } catch(e) {
+        console.log('Sound error:', e);
+    }
+}
+
+function playClickSound() {
+    playSound('click-sound');
+}
+
+function playCompleteSound() {
+    playSound('complete-sound');
+}
+
+function playAchievementSound() {
+    playSound('achievement-sound');
+}
+
+function playErrorSound() {
+    playSound('error-sound');
+}
+
+function playPowerupSound() {
+    playSound('powerup-sound');
+}
+
+let gameState = {
+    money: 1000,
+    reputation: 0,
+    currentTask: null,
+    progress: 0,
+    completedTasks: 0,
+    ravshanlevel: 1,
+    jamshutlevel: 1,
+    experience: 0,
+    achievements: [],
+    lastLoginDate: new Date().toDateString(),
+    powerups: [],
+    tutorialComplete: false,
+    tutorialStep: 0,
+    combo: 0,
+    weather: 'sunny',
+    reviews: [],
+    rating: 0
+};
+
+const ACHIEVEMENTS = [
+    {
+        id: 'first_job',
+        icon: '🎉',
+        title: 'Первый заказ',
+        description: 'Выполните первый заказ',
+        condition: (state) => state.completedTasks >= 1
+    },
+    {
+        id: 'master',
+        icon: '⭐',
+        title: 'Мастер',
+        description: 'Достигните репутации 50',
+        condition: (state) => state.reputation >= 50
+    },
+    {
+        id: 'rich',
+        icon: '💰',
+        title: 'Богатей',
+        description: 'Накопите 50,000₽',
+        condition: (state) => state.money >= 50000
+    },
+    {
+        id: 'combo_master',
+        icon: '🔥',
+        title: 'Комбо мастер',
+        description: 'Достигните комбо х5',
+        condition: (state) => state.combo >= 5
+    },
+    {
+        id: 'weather_master',
+        icon: '🌦️',
+        title: 'Всепогодный мастер',
+        description: 'Завершите заказ в плохую погоду',
+        condition: (state) => state.weather !== 'sunny' && state.completedTasks > 0
+    }
+];
+
+const tutorialSteps = [
+    {
+        message: "Добро пожаловать в игру! Давайте научимся ремонтировать квартиры!",
+        highlight: ".game-container"
+    },
+    {
+        message: "Нажмите 'Взять новый заказ' чтобы начать работу",
+        highlight: "#new-task-btn"
+    },
+    {
+        message: "Используйте правильные инструменты для работы. Для покраски используйте '🎨 Красить', для плитки - '🛠️ Класть плитку'",
+        highlight: ".tools"
+    },
+    {
+        message: "Следите за репутацией и деньгами - это важно для развития!",
+        highlight: ".stats"
+    }
+];
+
+const tasks = [
+    {
+        description: "Покрасить стены в гостиной",
+        reward: 5000,
+        requiredTool: "paint",
+        difficulty: 1
+    },
+    {
+        description: "Положить плитку в ванной",
+        reward: 7000,
+        requiredTool: "tile",
+        difficulty: 2
+    },
+    {
+        description: "Косметический ремонт кухни",
+        reward: 10000,
+        requiredTool: "paint",
+        difficulty: 3
+    },
+    {
+        description: "Обновить плитку в прихожей",
+        reward: 6000,
+        requiredTool: "tile",
+        difficulty: 2
+    },
+    {
+        description: "Покрасить потолок в спальне",
+        reward: 4000,
+        requiredTool: "paint",
+        difficulty: 1
+    }
+];
+
+const vipTasks = [
+    {
+        description: "VIP: Ремонт пентхауса",
+        reward: 15000,
+        requiredTool: "paint",
+        difficulty: 4,
+        isVIP: true
+    },
+    {
+        description: "VIP: Дизайнерская плитка в спа",
+        reward: 20000,
+        requiredTool: "tile",
+        difficulty: 4,
+        isVIP: true
+    }
+];
+
+function showNotification(message, type = 'default') {
+    const notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.className = 'notification';
+    if (type === 'error') notification.classList.add('error');
+    if (type === 'success') notification.classList.add('success');
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 3000);
+}
+
+function getNewTask() {
+    if (gameState.currentTask) {
+        playErrorSound();
+        showNotification('Сначала закончите текущий заказ!', 'error');
+        return;
+    }
+    playClickSound();
+    
+    const isVIP = Math.random() > 0.8;
+    const taskPool = isVIP ? vipTasks : tasks;
+    const randomTask = taskPool[Math.floor(Math.random() * taskPool.length)];
+    gameState.currentTask = randomTask;
+    gameState.progress = 0;
+    
+    const vipPrefix = isVIP ? '👑 ' : '';
+    document.getElementById('task-description').textContent = 
+        `${vipPrefix}${randomTask.description} (Награда: ${randomTask.reward}₽)`;
+    document.getElementById('task-progress').style.width = '0%';
+    
+    const taskBtn = document.getElementById('new-task-btn');
+    taskBtn.disabled = true;
+    taskBtn.style.opacity = '0.5';
+    
+    setRandomWeather();
+    showNotification('Новый заказ получен!', 'success');
+    updateUI();
+}
+
+function useTool(tool) {
+    if (!gameState.currentTask) {
+        playErrorSound();
+        showNotification('Сначала возьмите заказ!', 'error');
+        return;
+    }
+    playClickSound();
+    checkAchievements();
+
+    let progressIncrease = 20;
+    
+    switch(gameState.weather) {
+        case 'rainy': progressIncrease *= 0.8; break;
+        case 'windy': progressIncrease *= 0.9; break;
+        case 'sunny': progressIncrease *= 1.1; break;
+    }
+
+    if (tool === gameState.currentTask.requiredTool) {
+        gameState.combo++;
+        progressIncrease *= (1 + (gameState.combo * 0.1));
+        gameState.progress += progressIncrease;
+        
+        if (gameState.combo > 2) {
+            showNotification(`Комбо x${gameState.combo}! +${Math.floor(gameState.combo * 10)}% к скорости`, 'success');
+            showComboEffect(gameState.combo);
+        }
+        
+        if (Math.random() > 0.8) {
+            gameState.reputation += 1;
+            showNotification('Отличная работа! +1 к репутации', 'success');
+        }
+    } else {
+        gameState.combo = 0;
+        gameState.progress += 5;
+        gameState.reputation -= 1;
+        showNotification('Неправильный инструмент! Используйте подходящий инструмент для задачи.', 'error');
+    }
+
+    spawnPowerup();
+
+    if (gameState.progress >= 100) {
+        completeTask();
+    }
+
+    document.getElementById('task-progress').style.width = gameState.progress + '%';
+    updateUI();
+}
+
+function setRandomWeather() {
+    const weathers = ['sunny', 'rainy', 'windy'];
+    gameState.weather = weathers[Math.floor(Math.random() * weathers.length)];
+    updateWeatherEffect();
+}
+
+function updateWeatherEffect() {
+    const container = document.querySelector('.game-container');
+    container.className = 'game-container ' + gameState.weather;
+    
+    let message;
+    switch(gameState.weather) {
+        case 'rainy':
+            message = 'Дождь замедляет работу! (-20% к скорости)';
+            break;
+        case 'windy':
+            message = 'Ветер мешает красить! (-10% к скорости)';
+            break;
+        default:
+            message = 'Отличная погода для работы! (+10% к скорости)';
+    }
+    showNotification(message);
+}
+
+function showComboEffect(combo) {
+    const effect = document.createElement('div');
+    effect.className = 'combo-indicator';
+    effect.textContent = `x${combo}`;
+    document.body.appendChild(effect);
+    
+    setTimeout(() => effect.remove(), 500);
+}
+
+function completeTask() {
+    playCompleteSound();
+    const bonus = Math.floor(gameState.reputation / 10) * 500;
+    const totalReward = gameState.currentTask.reward + bonus;
+    
+    gameState.money += totalReward;
+    gameState.reputation += 10;
+    gameState.completedTasks += 1;
+    
+    gameState.experience += 100;
+    if (gameState.experience >= 1000) {
+        levelUp();
+    }
+    
+    document.getElementById('current-apartment').classList.add('task-complete');
+    
+    setTimeout(() => {
+        document.getElementById('current-apartment').classList.remove('task-complete');
+    }, 500);
+
+    showNotification(`Заказ выполнен!\nПолучено: ${totalReward}₽\n(Включая бонус за репутацию: ${bonus}₽)`, 'success');
+    
+    gameState.currentTask = null;
+    gameState.progress = 0;
+    document.getElementById('task-description').textContent = "Ждём нового заказа...";
+    
+    const taskBtn = document.getElementById('new-task-btn');
+    taskBtn.disabled = false;
+    taskBtn.style.opacity = '1';
+    
+    addReview();
+    updateUI();
+    checkAchievements();
+    
+    if (gameState.completedTasks % 5 === 0) {
+        showNotification('Поздравляем! Вы становитесь всё более опытными мастерами!', 'success');
+    }
+}
+
+function updateUI() {
+    document.getElementById('money').textContent = gameState.money.toLocaleString();
+    document.getElementById('reputation').textContent = gameState.reputation;
+}
+
+// New functions for powerups and achievements
+function spawnPowerup() {
+    if (!gameState.currentTask) return;
+    
+    if (Math.random() > 0.8) {
+        const powerups = ['double_speed', 'instant_progress', 'double_money'];
+        const powerup = powerups[Math.floor(Math.random() * powerups.length)];
+        
+        // Check if powerup already exists
+        if (!document.querySelector('.powerup')) {
+            gameState.powerups.push(powerup);
+            showPowerupButton(powerup);
+        }
+    }
+}
+
+function showPowerupButton(type) {
+    const toolsDiv = document.querySelector('.tools');
+    const powerupBtn = document.createElement('button');
+    powerupBtn.className = 'tool powerup';
+    
+    switch(type) {
+        case 'double_speed':
+            powerupBtn.innerHTML = '⚡ Ускорение';
+            break;
+        case 'instant_progress':
+            powerupBtn.innerHTML = '🚀 Автозавершение';
+            break;
+        case 'double_money':
+            powerupBtn.innerHTML = '💰 Двойная награда';
+            break;
+    }
+    
+    powerupBtn.onclick = () => usePowerup(type);
+    toolsDiv.appendChild(powerupBtn);
+}
+
+function usePowerup(type) {
+    if (!gameState.currentTask) {
+        playErrorSound();
+        showNotification('Сначала возьмите заказ!', 'error');
+        // Remove powerup button and cleanup
+        const powerupIndex = gameState.powerups.indexOf(type);
+        gameState.powerups.splice(powerupIndex, 1);
+        document.querySelector('.powerup').remove();
+        return;
+    }
+    playPowerupSound();
+
+    switch(type) {
+        case 'double_speed':
+            gameState.progress += 40;
+            break;
+        case 'instant_progress':
+            gameState.progress = 100;
+            break;
+        case 'double_money':
+            if (gameState.currentTask) {
+                gameState.currentTask.reward *= 2;
+            }
+            break;
+    }
+    
+    const powerupIndex = gameState.powerups.indexOf(type);
+    gameState.powerups.splice(powerupIndex, 1);
+    
+    const powerupBtn = document.querySelector('.powerup');
+    if (powerupBtn) {
+        powerupBtn.remove();
+    }
+    
+    updateUI();
+    
+    if (gameState.progress >= 100) {
+        completeTask();
+    }
+}
+
+function levelUp() {
+    if (gameState.currentTask.requiredTool === 'paint') {
+        gameState.ravshanlevel++;
+        document.getElementById('ravshan-level').textContent = gameState.ravshanlevel;
+        showNotification(`Равшан получил ${gameState.ravshanlevel} уровень!\nСкорость покраски увеличена!`, 'success');
+    } else {
+        gameState.jamshutlevel++;
+        document.getElementById('jamshut-level').textContent = gameState.jamshutlevel;
+        showNotification(`Джамшут получил ${gameState.jamshutlevel} уровень!\nСкорость укладки плитки увеличена!`, 'success');
+    }
+    gameState.experience = 0;
+}
+
+function startTutorial() {
+    if (gameState.tutorialComplete) return;
+    showTutorialStep();
+}
+
+function showTutorialStep() {
+    if (gameState.tutorialStep >= tutorialSteps.length) {
+        gameState.tutorialComplete = true;
+        return;
+    }
+
+    const step = tutorialSteps[gameState.tutorialStep];
+    const tutorialBox = document.createElement('div');
+    tutorialBox.className = 'tutorial-box';
+    tutorialBox.innerHTML = `
+        <div class="tutorial-message">${step.message}</div>
+        <button class="tutorial-next">Далее</button>
+    `;
+    document.body.appendChild(tutorialBox);
+
+    const highlightedElement = document.querySelector(step.highlight);
+    highlightedElement.classList.add('tutorial-highlight');
+
+    tutorialBox.querySelector('.tutorial-next').onclick = () => {
+        highlightedElement.classList.remove('tutorial-highlight');
+        tutorialBox.remove();
+        gameState.tutorialStep++;
+        showTutorialStep();
+    };
+}
+
+// Review system
+const reviewTemplates = {
+    positive: [
+        "Отличная работа! Все сделано очень аккуратно.",
+        "Мастера знают своё дело! Рекомендую!",
+        "Быстро и качественно. Спасибо!",
+        "Превзошли все ожидания!",
+        "Очень доволен результатом!"
+    ],
+    negative: [
+        "Могло быть и лучше...",
+        "Работа выполнена не очень аккуратно",
+        "Долго делали простую работу",
+        "Есть некоторые недочёты",
+        "Не совсем то, что ожидал"
+    ]
+};
+
+function addReview() {
+    const isPositive = Math.random() > 0.3 || gameState.combo > 3;
+    const stars = isPositive ? Math.floor(Math.random() * 2) + 4 : Math.floor(Math.random() * 2) + 2;
+    const text = isPositive ? 
+        reviewTemplates.positive[Math.floor(Math.random() * reviewTemplates.positive.length)] :
+        reviewTemplates.negative[Math.floor(Math.random() * reviewTemplates.negative.length)];
+
+    const review = {
+        stars,
+        text,
+        date: new Date().toLocaleDateString(),
+        isPositive
+    };
+
+    gameState.reviews.unshift(review);
+    if (gameState.reviews.length > 10) gameState.reviews.pop();
+    
+    updateReviews();
+    updateRating();
+}
+
+function updateReviews() {
+    const reviewsList = document.getElementById('reviews-list');
+    reviewsList.innerHTML = '';
+
+    gameState.reviews.forEach(review => {
+        const reviewElement = document.createElement('div');
+        reviewElement.className = `review ${review.isPositive ? 'positive' : 'negative'}`;
+        reviewElement.innerHTML = `
+            <div class="review-stars">${'⭐'.repeat(review.stars)}</div>
+            <div class="review-text">${review.text}</div>
+            <div class="review-date">${review.date}</div>
+        `;
+        reviewsList.appendChild(reviewElement);
+    });
+}
+
+function updateRating() {
+    if (gameState.reviews.length === 0) return;
+
+    const avgRating = gameState.reviews.reduce((acc, rev) => acc + rev.stars, 0) / gameState.reviews.length;
+    gameState.rating = avgRating.toFixed(1);
+
+    const ratingBadge = document.getElementById('rating-badge');
+    const ratingSpan = document.getElementById('rating');
+    
+    ratingSpan.textContent = gameState.rating;
+    ratingBadge.style.display = 'block';
+}
+
+// Initialize tutorial
+document.addEventListener('DOMContentLoaded', () => {
+    initAchievements();
+    startTutorial();
+    
+    // Add click sound to all buttons
+    document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', playClickSound);
+    });
+});
+
+function checkDailyBonus() {
+    const today = new Date().toDateString();
+    if (gameState.lastLoginDate !== today) {
+        gameState.money += 1000;
+        gameState.lastLoginDate = today;
+        showNotification('Ежедневный бонус: +1000₽!', 'success');
+    }
+}
+
+function initAchievements() {
+    const achievementsList = document.getElementById('achievements-list');
+    achievementsList.innerHTML = '';
+    
+    ACHIEVEMENTS.forEach(achievement => {
+        const achievementEl = document.createElement('div');
+        achievementEl.className = `achievement ${gameState.achievements.includes(achievement.id) ? '' : 'locked'}`;
+        achievementEl.innerHTML = `
+            <div class="achievement-icon">${achievement.icon}</div>
+            <div class="achievement-title">${achievement.title}</div>
+            <div class="achievement-desc">${achievement.description}</div>
+        `;
+        achievementsList.appendChild(achievementEl);
+    });
+}
+
+function checkAchievements() {
+    ACHIEVEMENTS.forEach(achievement => {
+        if (!gameState.achievements.includes(achievement.id) && achievement.condition(gameState)) {
+            gameState.achievements.push(achievement.id);
+            playAchievementSound();
+            showNotification(`🏆 Достижение разблокировано: ${achievement.title}!`, 'success');
+            initAchievements();
+        }
+    });
+}
+
+// Инициализация игры
+checkDailyBonus();
+updateUI();
+</script>
+</body>
+</html>
